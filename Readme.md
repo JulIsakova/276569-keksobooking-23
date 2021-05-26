@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Юлия Исакова](https://up.htmlacademy.ru/javascript/23/user/276569).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Устименко] (https://htmlacademy.ru/profile/spiritmoon).
 
 ---
 
