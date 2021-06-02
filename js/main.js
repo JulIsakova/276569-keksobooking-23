@@ -1,79 +1,44 @@
 let min = -3; // минимальное знаечние диапазана
-let max = 10; // максимальное значение диапазона
-let fixed = 5; // кол-во знаков после запятой
+let max = 5; // максимальное значение диапазона
+const fixed = 5; // кол-во знаков после запятой
+let random;
 
 /*
- * Функция генерирует случайное целое число из выбранного диапазона
+ * Приводим значения диапазона к модулю
  */
+min = Math.abs(min);
+max = Math.abs(max);
 
-function getRandomNumber(minInt, maxInt){
-  let random;
-
-  if(minInt >= 0 && maxInt >= 0)
-  {
-    if(minInt > maxInt)
-    {
-      random = Math.floor(Math.random() * (minInt - maxInt + 1)) + maxInt;
-    }
-    else
-    {
-      random = Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
-    }
-  }
-  else
-  {
-    minInt = Math.abs(minInt);
-    maxInt = Math.abs(maxInt);
-
-    if(minInt > maxInt)
-    {
-      random = Math.floor(Math.random() * (minInt - maxInt + 1)) + maxInt;
-    }
-    else
-    {
-      random = Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt;
-    }
+/*
+ * Функция генерирует случайное число
+ */
+function generateNumber(minNum, maxNum) {
+  if (minNum > maxNum) {
+    const newMin = maxNum;
+    maxNum = minNum;
+    random = Math.random() * (maxNum - newMin + 1) + newMin;
+  } else {
+    random = Math.random() * (maxNum - minNum + 1) + minNum;
   }
 
   return random;
 }
 
 /*
- * Функция генерирует случайное число с плавающей точкой из выбранного диапазона
+ * Функция возвращает целое число из выбранного диапазона
  */
-
-function getRealRandomNumber(minReal, maxReal, fixed){
-  let random;
-
-  if(minReal >= 0 && maxReal >= 0)
-  {
-    if(minReal > maxReal)
-    {
-      random = Math.random() * (minReal - maxReal + 1) + maxReal;
-    }
-    else
-    {
-      random = Math.random() * (maxReal - minReal + 1) + minReal;
-    }
-  }
-  else
-  {
-    minReal = Math.abs(minReal);
-    maxReal = Math.abs(maxReal);
-
-    if(minReal > maxReal)
-    {
-      random = Math.random() * (minReal - maxReal + 1) + maxReal;
-    }
-    else
-    {
-      random = Math.random() * (maxReal - minReal + 1) + minReal;
-    }
-  }
-
-  return random.toFixed(fixed);
+function getRandomNumber(minInt, maxInt) {
+  const rand = Math.floor(generateNumber(minInt, maxInt));
+  return rand;
 }
 
-console.log('Целое число: ' + getRandomNumber(min, max));
+/*
+ * Функция возвращает число с плавающей точкой из выбранного диапазона
+ */
+function getFloatRandomNumber(minFloat, maxFloat, fixedNum) {
+  const rand = generateNumber(minFloat, maxFloat);
+  return rand.toFixed(fixedNum);
+}
 
-console.log('Число с плавающей точкой: ' + getRealRandomNumber(min, max, fixed));
+getRandomNumber(min, max);
+getFloatRandomNumber(min, max, fixed);
