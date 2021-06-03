@@ -1,44 +1,44 @@
-let min = -3; // минимальное знаечние диапазана
-let max = 5; // максимальное значение диапазона
+const min = 1; // минимальное знаечние диапазана
+const max = 10; // максимальное значение диапазона
 const fixed = 5; // кол-во знаков после запятой
-let random;
-
-/*
- * Приводим значения диапазона к модулю
- */
-min = Math.abs(min);
-max = Math.abs(max);
 
 /*
  * Функция генерирует случайное число
  */
-function generateNumber(minNum, maxNum) {
+function getRandomNumber(minNum, maxNum) {
+  /*
+   * Приводим значения диапазона к модулю
+   */
+  minNum = Math.abs(minNum);
+  maxNum = Math.abs(maxNum);
+
+  /*
+   * меняем значения min и max местами
+   */
   if (minNum > maxNum) {
     const newMin = maxNum;
     maxNum = minNum;
-    random = Math.random() * (maxNum - newMin + 1) + newMin;
-  } else {
-    random = Math.random() * (maxNum - minNum + 1) + minNum;
+    minNum = newMin;
   }
 
-  return random;
+  return Math.random() * (maxNum - minNum + 1) + minNum;
 }
 
 /*
  * Функция возвращает целое число из выбранного диапазона
  */
-function getRandomNumber(minInt, maxInt) {
-  const rand = Math.floor(generateNumber(minInt, maxInt));
+function getRandomInt(minInt, maxInt) {
+  const rand = Math.floor(getRandomNumber(minInt, maxInt));
   return rand;
 }
 
 /*
  * Функция возвращает число с плавающей точкой из выбранного диапазона
  */
-function getFloatRandomNumber(minFloat, maxFloat, fixedNum) {
-  const rand = generateNumber(minFloat, maxFloat);
+function getRandomFloat(minFloat, maxFloat, fixedNum) {
+  const rand = getRandomNumber(minFloat, maxFloat);
   return rand.toFixed(fixedNum);
 }
 
-getRandomNumber(min, max);
-getFloatRandomNumber(min, max, fixed);
+getRandomInt(min, max);
+getRandomFloat(min, max, fixed);
