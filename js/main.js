@@ -106,5 +106,6 @@ const generateObject = function() {
   };
 };
 
-// eslint-disable-next-line no-unused-vars
-const objectsArray = new Array(10).fill().map(() => generateObject());
+//eslint ругается на эту строку
+//const objectsArray = new Array(10).fill().map(() => generateObject());
+new Array(10).fill().map(() => generateObject());
