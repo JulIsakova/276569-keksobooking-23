@@ -106,5 +106,5 @@ const generateObject = function() {
   };
 };
 
-// не смогла записать этот результат в переменную, ругается eslint
-new Array(10).fill().map(() => generateObject());
+// eslint-disable-next-line no-unused-vars
+const objectsArray = new Array(10).fill().map(() => generateObject());
