@@ -14,8 +14,8 @@ const checkTimes = ['12:00', '13:00', '14:00'];
 */
 const avatars = [];
 
-for(let av = 1; av <= 10; av++) {
-  const avatarsUrl = av < 10 ? `img/avatars/user0${av}.png` : `img/avatars/user${av}.png`;
+for(let index = 1; index <= 10; index++) {
+  const avatarsUrl = index < 10 ? `img/avatars/user0${index}.png` : `img/avatars/user${index}.png`;
   avatars.push(avatarsUrl);
 }
 
