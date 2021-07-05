@@ -115,5 +115,6 @@ const generateObjectsArray = function() {
   return objectsArray;
 };
 
+//пш-пш проверка связи
 generateObjectsArray();
 
