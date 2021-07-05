@@ -9,15 +9,24 @@ const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'condit
 const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 const checkTimes = ['12:00', '13:00', '14:00'];
 
-/* Создаем массив из 10 элементов с адресами изображений авторов.
-* Перед однозначными числами ставится 0. Например, 01, 02...10.
-*/
-const avatars = [];
+const SHOWADSNUM = 10; //константа задает количество выводимых похожих объявлений
 
-for(let index = 1; index <= 10; index++) {
-  const avatarsUrl = index < 10 ? `img/avatars/user0${index}.png` : `img/avatars/user${index}.png`;
-  avatars.push(avatarsUrl);
-}
+/* Создаем массив из SHOWADSNUM элементов с адресами изображений авторов.
+* Перед однозначными числами ставится 0. Например, 01, 02...10.
+*
+* Константа STARTDOUBLENUM задает значение, с которого начинаются двузначные числа.
+* Перед этими числами не требуется добавлять 0.
+*/
+const STARTDOUBLENUM = 10;
+
+const getAvatarsUrl = function() {
+  const avatars = [];
+  for(let index = 1; index <= SHOWADSNUM; index++) {
+    const avatarsUrl = index < STARTDOUBLENUM ? `img/avatars/user0${index}.png` : `img/avatars/user${index}.png`;
+    avatars.push(avatarsUrl);
+  }
+  return avatars;
+};
 
 /*
  * Функция генерирует случайное число
@@ -56,20 +65,11 @@ function getRandomFloat(minFloat, maxFloat, fixedNum) {
   return rand.toFixed(fixedNum);
 }
 
-/**
- * Функция выбирает из массива avatars случайное значение
- */
-const getElemFromArray = function(arr) {
-  const arrayElems = arr.slice();
-  return arrayElems.splice(getRandomInt(0, arrayElems.length -1 ), 1)[0];
-};
-
-/**
- * Функция генерирует массив случайной длины из уникальных элементов
+/*
+ * Функция генерирует массив случайной длины
  */
 const getArrayRandomLength = function(arr) {
-  const copyArray = arr.slice();
-  return copyArray.splice(getRandomInt(0, copyArray.length -1 ));
+  return arr.slice(getRandomInt(0, arr.length -1 ));
 };
 
 /**
@@ -80,32 +80,40 @@ const generateObject = function() {
     lat: getRandomFloat(35.65000, 35.70000, 5),
     lng: getRandomFloat(139.70000, 139.80000, 5),
   };
+  const avatarsArray = getAvatarsUrl();
 
   return {
     author: {
-      avatar: getElemFromArray(avatars),
+      avatar: avatarsArray[getRandomInt(0, avatarsArray.length -1 )],
     },
     offer: {
-      title: getElemFromArray(titles),
+      title: titles[getRandomInt(0, titles.length -1 )],
       get address(){
         return `${this.location.lat}, ${this.location.lng}`;
       },
       price: getRandomInt(100, 10000),
-      type: getElemFromArray(types),
+      type: types[getRandomInt(0, types.length -1 )],
       rooms: getRandomInt(1, 5),
       guests: getRandomInt(2, 10),
-      checkin: getElemFromArray(checkTimes),
+      checkin: checkTimes[getRandomInt(0, checkTimes.length -1 )],
       get checkout(){
         return this.checkin;
       },
       features: getArrayRandomLength(features),
-      description: getElemFromArray(descriptions),
+      description: descriptions[getRandomInt(0, descriptions.length -1 )],
       photos: getArrayRandomLength(photos),
       location,
     },
   };
 };
 
-//eslint ругается на эту строку
-//const objectsArray = new Array(10).fill().map(() => generateObject());
-new Array(10).fill().map(() => generateObject());
+/*
+ * Функция генерирует массив из SHOWADSNUM объектов, создаваемых в функции generateObject
+ */
+const generateObjectsArray = function() {
+  const objectsArray = Array.from({length: SHOWADSNUM}).map(() => generateObject());
+  return objectsArray;
+};
+
+generateObjectsArray();
+
