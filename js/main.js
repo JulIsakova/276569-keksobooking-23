@@ -110,11 +110,10 @@ const generateObject = function() {
 /*
  * Функция генерирует массив из SHOWADSNUM объектов, создаваемых в функции generateObject
  */
-const generateObjectsArray = function() {
+const generateObjectsArr = function() {
   const objectsArray = Array.from({length: SHOWADSNUM}).map(() => generateObject());
   return objectsArray;
 };
 
-//пш-пш проверка связи
-generateObjectsArray();
+generateObjectsArr();
 
