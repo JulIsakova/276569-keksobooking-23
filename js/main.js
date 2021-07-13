@@ -1,4 +1,4 @@
-import {appendToMap} from './append-to-map.js';
+import {appendToMap} from './map.js';
 
 appendToMap();
 

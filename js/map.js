@@ -1,5 +1,5 @@
 import {generateAds} from './ads.js';
-import {createAds} from './create-ads.js';
+import {createAds} from './create-html-ads.js';
 
 const mapCanvas = document.querySelector('#map-canvas');
 
