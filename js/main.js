@@ -1,5 +1,4 @@
-import {generateAds} from './ads.js';
-import {createHtmlAds} from './create-html-ads.js';
+import {appendAdToMap} from './map.js';
 
-createHtmlAds(generateAds());
+appendAdToMap();
 
